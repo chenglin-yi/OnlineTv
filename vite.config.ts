@@ -2,11 +2,24 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 import dotenv from 'dotenv'
+import fs from 'fs'
 
 dotenv.config()
 
+const copyWorkerPlugin = () => ({
+  name: 'copy-worker',
+  closeBundle() {
+    const src = path.resolve(__dirname, '_worker.js')
+    const dest = path.resolve(__dirname, 'dist/_worker.js')
+    if (fs.existsSync(src)) {
+      fs.copyFileSync(src, dest)
+      console.log('[copy-worker] Copied _worker.js to dist/')
+    }
+  }
+})
+
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [vue(), copyWorkerPlugin()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src')

@@ -1,9 +1,4 @@
-interface ProxyConfig {
-  path: string
-  target: string
-}
-
-const PROXY_CONFIG: ProxyConfig[] = [
+const PROXY_CONFIG = [
   { path: '/proxy-hongniu', target: 'https://www.hongniuzy2.com' },
   { path: '/proxy-mtzy', target: 'https://www.mtzy.me' },
   { path: '/proxy-liangzi', target: 'https://cj.lziapi.com' },
@@ -12,7 +7,7 @@ const PROXY_CONFIG: ProxyConfig[] = [
   { path: '/proxy-douban', target: 'https://caiji.dbzy5.com' },
 ]
 
-const IMG_PROXY_CONFIG: ProxyConfig[] = [
+const IMG_PROXY_CONFIG = [
   { path: '/hongniu-img', target: 'https://pic.hongniuzy.com' },
   { path: '/maotai-img', target: 'https://pic.5k5z.cn' },
   { path: '/liangzi-img', target: 'https://img.lzzyimg.com' },
@@ -22,7 +17,7 @@ const IMG_PROXY_CONFIG: ProxyConfig[] = [
 ]
 
 export default {
-  async fetch(request: Request): Promise<Response> {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url)
     const pathname = url.pathname
 
@@ -107,6 +102,6 @@ export default {
       }
     }
 
-    return new Response('Not Found', { status: 404 })
+    return env.ASSETS.fetch(request)
   }
 }

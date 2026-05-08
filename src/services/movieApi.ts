@@ -63,6 +63,7 @@ interface ApiVideo {
   vod_play_from: string
   vod_play_url: string
   vod_score: string
+  vod_douban_score?: string
 }
 
 export function parsePlayUrl(playUrl: string): VideoPlaySource[] {

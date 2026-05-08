@@ -1,12 +1,18 @@
 import axios from 'axios'
 import type { LineConfig, VideoItem, VideoSource, VideoEpisode, VideoPlaySource } from '@/types'
 
+const CORS_PROXY = 'https://api.allorigins.win/raw?url='
+
 const http = axios.create({
-  timeout: 15000,
+  timeout: 20000,
   headers: {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
   }
 })
+
+function getProxyUrl(url: string): string {
+  return CORS_PROXY + encodeURIComponent(url)
+}
 
 http.interceptors.response.use(
   (response) => response,
@@ -23,7 +29,7 @@ export async function testLineApi(line: LineConfig): Promise<boolean> {
     const testUrl = `${line.apiUrl}?ac=detail&limit=1&h=168`
     console.log(`[VibeTV] Testing line: ${line.name} (${testUrl})`)
     
-    const response = await http.get(testUrl, {
+    const response = await http.get(getProxyUrl(testUrl), {
       timeout: 8000,
       validateStatus: () => true
     })
@@ -42,7 +48,7 @@ export async function getHomeList(line: LineConfig): Promise<VideoItem[]> {
     const apiUrl = `${line.apiUrl}?ac=detail&limit=48&h=168`
     console.log(`[VibeTV] Fetching home list from: ${line.name}`)
     
-    const response = await http.get(apiUrl)
+    const response = await http.get(getProxyUrl(apiUrl))
     const data = response.data
     
     if (data?.list && Array.isArray(data.list)) {
@@ -70,7 +76,7 @@ async function fetchMissingCovers(items: VideoItem[], line: LineConfig): Promise
     const ids = items.filter(i => !i.cover).map(i => i.id).join(',')
     const detailUrl = `${line.apiUrl}?ac=detail&ids=${ids}`
     
-    const response = await http.get(detailUrl)
+    const response = await http.get(getProxyUrl(detailUrl))
     const data = response.data
     
     if (data?.list && Array.isArray(data.list)) {
@@ -95,7 +101,7 @@ export async function searchVideos(keyword: string, line: LineConfig): Promise<{
     const apiUrl = `${line.apiUrl}?ac=detail&wd=${encodeURIComponent(keyword)}&limit=30&h=168`
     console.log(`[VibeTV] Searching for: ${keyword} on ${line.name}`)
     
-    const response = await http.get(apiUrl)
+    const response = await http.get(getProxyUrl(apiUrl))
     const data = response.data
     
     if (data?.list && Array.isArray(data.list)) {
@@ -116,7 +122,7 @@ export async function getVideoDetail(id: string, line: LineConfig): Promise<{ it
     const apiUrl = `${line.apiUrl}?ac=detail&ids=${id}`
     console.log(`[VibeTV] Fetching detail for id: ${id} from ${line.name}`)
     
-    const response = await http.get(apiUrl)
+    const response = await http.get(getProxyUrl(apiUrl))
     const data = response.data
     
     if (data?.list && Array.isArray(data.list) && data.list.length > 0) {
@@ -226,58 +232,28 @@ function parseMaccmsPlayUrl(playUrl: string, downUrl?: string, playFrom?: string
 
 function fixCoverUrl(cover: string, line: LineConfig): string {
   if (!cover) return ''
-  
+
   let url = cover.replace(/\\/g, '')
-  
-  if (line.imgProxy) {
-    if (line.imgProxy.startsWith('http')) {
-      const match = line.imgProxy.match(/^https?:\/\/[^/]+/)
-      if (match && url.includes(match[1])) {
-        return line.imgProxy + url.split(match[1])[1]
-      }
-      if (url.includes('http')) {
-        return url.replace('http://', 'https://')
-      }
-      return url
-    }
-    
-    const imgProxyMap: Record<string, string> = {
-      'img.ffzy888.com': '/vod-img',
-      'dbzy5.com': '/douban-img2',
-      'mtzy.me': '/maotai-img',
-      'pic.5k5z.cn': '/maotai-img',
-      'hongniuziyuan.com': '/hongniu-img',
-      'pic.hongniuzy.com': '/hongniu-img',
-      'cn.hongniuzy.com': '/hongniu-img'
-    }
-    
-    for (const [domain, proxy] of Object.entries(imgProxyMap)) {
-      if (url.includes(domain)) {
-        const pathAfterDomain = url.split(domain)[1]
-        return `${proxy}${pathAfterDomain}`
-      }
-    }
-  }
-  
+
   if (url.startsWith('http://')) {
-    return url.replace('http://', 'https://')
+    url = url.replace('http://', 'https://')
   }
-  
+
   if (url.startsWith('https://')) {
-    return url
+    return getProxyUrl(url)
   }
-  
+
   if (url.startsWith('//')) {
-    return 'https:' + url
+    return getProxyUrl('https:' + url)
   }
-  
+
   if (url.startsWith('/')) {
     const match = line.apiUrl.match(/^https?:\/\/[^/]+/)
     if (match) {
-      return match[0] + url
+      return getProxyUrl(match[0] + url)
     }
   }
-  
+
   return url
 }
 

@@ -7,56 +7,56 @@ export const useAppStore = defineStore('app', () => {
     {
       id: 'hongniu',
       name: '红牛资源',
-      apiUrl: '/proxy-hongniu/api.php/provide/vod/',
+      apiUrl: 'https://www.hongniuzy2.com/api.php/provide/vod/',
       status: 'online',
       type: 'maccms',
-      imgProxy: '/hongniu-img',
-      videoProxy: '/video-proxy'
+      imgProxy: 'https://pic.hongniuzy.com',
+      videoProxy: ''
     },
     {
       id: 'mtzy',
       name: '馒头资源',
-      apiUrl: '/proxy-mtzy/api.php/provide/vod/',
+      apiUrl: 'https://www.mtzy.me/api.php/provide/vod/',
       status: 'online',
       type: 'maccms',
-      imgProxy: '/maotai-img',
-      videoProxy: '/video-proxy'
+      imgProxy: 'https://pic.5k5z.cn',
+      videoProxy: ''
     },
     {
       id: 'liangzi',
       name: '量子资源',
-      apiUrl: '/proxy-liangzi/api.php/provide/vod/',
+      apiUrl: 'https://cj.lziapi.com/api.php/provide/vod/',
       status: 'online',
       type: 'maccms',
-      imgProxy: '/liangzi-img',
-      videoProxy: '/video-proxy'
+      imgProxy: 'https://img.lzzyimg.com',
+      videoProxy: ''
     },
     {
       id: 'feifan',
       name: '非凡资源',
-      apiUrl: '/proxy-feifan/api.php/provide/vod/',
+      apiUrl: 'https://api.ffzyapi.com/api.php/provide/vod/',
       status: 'online',
       type: 'maccms',
-      imgProxy: '/vod-img',
-      videoProxy: '/video-proxy'
+      imgProxy: 'https://img.ffzy888.com',
+      videoProxy: ''
     },
     {
       id: 'wolong',
       name: '卧龙资源',
-      apiUrl: '/proxy-wolong/api.php/provide/vod/',
+      apiUrl: 'https://collect.wolongzyw.com/api.php/provide/vod/',
       status: 'online',
       type: 'maccms',
-      imgProxy: '/wolong-img',
-      videoProxy: '/video-proxy'
+      imgProxy: 'https://imgwolong.com',
+      videoProxy: ''
     },
     {
       id: 'douban',
       name: '豆瓣资源',
-      apiUrl: '/proxy-douban/api.php/provide/vod/',
+      apiUrl: 'https://caiji.dbzy5.com/api.php/provide/vod/',
       status: 'online',
       type: 'maccms',
-      imgProxy: '',
-      videoProxy: '/video-proxy'
+      imgProxy: 'https://dbzy5.com',
+      videoProxy: ''
     }
   ])
 

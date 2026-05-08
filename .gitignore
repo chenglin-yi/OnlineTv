@@ -41,3 +41,6 @@ coverage/
 # Cache
 .turbo/
 .vite/
+
+# EdgeOne edge functions
+edge/

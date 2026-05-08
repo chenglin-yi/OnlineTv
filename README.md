@@ -1,4 +1,4 @@
-# VibeTV - 在线观影平台
+# VibeLume - 沉浸光影，自在观影
 
 一个轻量级、开源免费的在线影视搜索与观看平台，支持多接口源接入，用户可自由选择播放线路。
 
@@ -8,6 +8,7 @@
 - **线路切换**：支持用户自由选择不同播放线路，提升观影成功率
 - **静态部署**：纯前端实现，支持Vercel/腾讯EdgeOne一键部署
 - **无广告干扰**：专注观影体验，无强制广告
+- **智能缓存**：搜索结果和首页数据本地缓存，提升响应速度
 
 ## 技术栈
 
@@ -17,8 +18,10 @@
 | 构建工具 | Vite | 快速构建工具 |
 | UI样式 | Tailwind CSS | 原子化CSS框架 |
 | 状态管理 | Pinia | Vue状态管理库 |
-| 视频播放 | Plyr / HLS.js | 开源视频播放器 |
+| 视频播放 | HLS.js | HLS流媒体播放 |
 | 类型检查 | TypeScript | JavaScript超集 |
+| HTTP客户端 | Axios | HTTP请求库 |
+| 路由 | Vue Router | Vue官方路由 |
 
 ## 快速开始
 
@@ -31,15 +34,11 @@
 
 ```bash
 # 克隆仓库
-git clone https://github.com/YOUR_USERNAME/OnlineTv.git
+git clone https://github.com/chenglin-yi/OnlineTv.git
 cd OnlineTv
 
 # 安装依赖
 npm install
-
-# 配置环境变量
-cp .env.example .env
-# 编辑 .env 文件，填入你的 TMDB API Key
 ```
 
 ### 开发
@@ -69,21 +68,19 @@ npm run preview
 ```
 ├── src/
 │   ├── api/                # API接口层
+│   │   ├── index.ts        # 线路测试接口
+│   │   └── video.ts        # 视频搜索/详情接口
 │   ├── components/         # Vue组件
 │   │   ├── Carousel.vue    # 轮播组件
 │   │   ├── Header.vue      # 顶部导航
 │   │   ├── SearchBar.vue   # 搜索框
 │   │   └── VideoCard.vue   # 影视卡片
 │   ├── pages/              # 页面组件
-│   │   ├── Home.vue        # 首页
+│   │   ├── Home.vue        # 首页（发现）
 │   │   ├── Play.vue        # 播放页
-│   │   └── Search.vue      # 搜索页
-│   ├── services/           # 服务层
-│   │   ├── cmsApi.ts       # CMS接口
-│   │   ├── douban.ts       # 豆瓣接口
-│   │   ├── movieApi.ts     # 影视接口
-│   │   └── tmdb.ts         # TMDB接口
+│   │   └── Search.vue      # 搜索页（找片）
 │   ├── stores/             # 状态管理
+│   │   └── app.ts          # 应用状态（线路管理）
 │   ├── types/              # 类型定义
 │   ├── router/             # 路由配置
 │   ├── App.vue             # 根组件
@@ -112,27 +109,18 @@ npm run preview
 1. Fork 本仓库到你的GitHub账号
 2. 登录 [Vercel](https://vercel.com/)
 3. Import 本仓库
-4. 配置环境变量（如 TMDB_API_KEY）
-5. 部署完成
-
-## 环境变量
-
-| 变量名 | 说明 | 默认值 |
-| :--- | :--- | :--- |
-| TMDB_API_KEY | TMDB API Key | 必填 |
-| TMDB_BASE_URL | TMDB API 基础URL | https://api.themoviedb.org/3 |
-| TMDB_IMAGE_BASE_URL | TMDB 图片基础URL | https://image.tmdb.org/t/p |
+4. 部署完成
 
 ## 影视源接口
 
 | 接口名称 | 类型 | 状态 | 说明 |
 | :--- | :--- | :--- | :--- |
-| TMDB API | 数据接口 | ✅ 稳定 | 提供影视元数据（需API Key） |
-| 南风接口 | 播放接口 | ⚠️ 需验证 | 综合影视源 |
-| 快乐接口 | 播放接口 | ⚠️ 需验证 | 多线路影视源 |
-| 饭太硬接口 | 播放接口 | ⚠️ 需验证 | FongMi格式接口 |
-| 摸鱼接口 | 播放接口 | ⚠️ 需验证 | 综合影视源 |
-| 肥猫接口 | 播放接口 | ⚠️ 需验证 | 垂直类影视源 |
+| 红牛资源 | MacCMS | ✅ 稳定 | 综合影视源 |
+| 馒头资源 | MacCMS | ✅ 稳定 | 综合影视源 |
+| 量子资源 | MacCMS | ✅ 稳定 | 综合影视源 |
+| 非凡资源 | MacCMS | ✅ 稳定 | 综合影视源 |
+| 卧龙资源 | MacCMS | ✅ 稳定 | 综合影视源 |
+| 豆瓣资源 | MacCMS | ✅ 稳定 | 影视元数据 |
 
 ## 开发规范
 
@@ -154,5 +142,5 @@ npm run preview
 
 ---
 
-**文档版本**: v1.0  
+**文档版本**: v2.0  
 **创建日期**: 2026-05-08

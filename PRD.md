@@ -1,5 +1,4 @@
-
-# 静态观影网站 PRD 文档
+# VibeLume PRD 文档
 
 ---
 
@@ -9,8 +8,8 @@
 本项目旨在构建一个轻量级、开源免费的在线影视搜索与观看平台，支持多接口源接入，用户可自由选择播放线路。目标用户主要为个人及朋友小范围使用，优先部署于腾讯EdgeOne平台。
 
 ### 1.2 产品定位
-- **产品名称**：VibeTV
-- **产品口号**：自由观影，畅享精彩
+- **产品名称**：VibeLume
+- **产品口号**：沉浸光影，自在 VibeLume
 - **产品定位**：个人/小团体使用的轻量级影视聚合平台
 
 ### 1.3 核心价值
@@ -45,26 +44,26 @@
 | 需求点 | 描述 | 优先级 |
 | :--- | :--- | :--- |
 | 关键词搜索 | 支持电影/剧集名称关键词搜索 | 高 |
-| 分类筛选 | 支持按类型、地区、年份筛选 | 中 |
-| 热门推荐 | 首页展示热门/最新影视内容 | 高 |
-| 搜索历史 | 记录用户搜索历史，方便快速查找 | 低 |
+| 搜索缓存 | 本地缓存搜索结果，提升响应速度 | 中 |
+| 防抖搜索 | 输入防抖300ms，减少无效请求 | 中 |
 
 #### 3.1.2 播放功能
 | 需求点 | 描述 | 优先级 |
 | :--- | :--- | :--- |
 | 在线播放 | 支持在线流媒体播放，无需下载 | 高 |
+| HLS支持 | 使用HLS.js播放m3u8格式视频 | 高 |
 | 线路切换 | 同一影视支持多条播放线路切换 | 高 |
 | 播放控制 | 支持播放/暂停、进度拖动、音量调节 | 高 |
-| 画质选择 | 支持多种画质切换（标清/高清/超清） | 中 |
 | 全屏播放 | 支持全屏模式观看 | 高 |
+| 新窗口播放 | 支持在新窗口中播放视频 | 中 |
 
 #### 3.1.3 线路管理
 | 需求点 | 描述 | 优先级 |
 | :--- | :--- | :--- |
 | 线路列表 | 展示当前可用的影视源线路 | 高 |
 | 线路切换 | 用户可自由切换默认线路 | 高 |
-| 线路状态 | 显示线路可用性状态（可用/不可用） | 中 |
-| 自定义线路 | 支持用户添加自定义线路接口 | 低 |
+| 线路状态 | 显示线路可用性状态（可用/不可用） | 高 |
+| 线路测试 | 启动时自动测试所有线路可用性 | 中 |
 
 ### 3.2 用户体验功能
 
@@ -72,22 +71,25 @@
 | 需求点 | 描述 | 优先级 |
 | :--- | :--- | :--- |
 | 响应式设计 | 适配桌面端、平板、手机等多种设备 | 高 |
-| 暗色模式 | 支持明暗主题切换，保护眼睛 | 中 |
+| 暗色主题 | 默认暗色主题，适合观影场景 | 高 |
 | 加载动画 | 提供流畅的加载状态反馈 | 中 |
 | 错误提示 | 播放失败时提供友好的错误提示 | 高 |
+| 自动隐藏控制栏 | 播放时3秒无操作自动隐藏控制栏 | 中 |
 
-#### 3.2.2 个性化功能
+#### 3.2.2 首页内容
 | 需求点 | 描述 | 优先级 |
 | :--- | :--- | :--- |
-| 收藏功能 | 支持收藏喜欢的影视内容 | 中 |
-| 观影记录 | 记录用户观影历史和进度 | 低 |
+| 轮播展示 | 首页顶部展示热门影视轮播 | 高 |
+| 分类展示 | 按精彩影视、热播剧集、动漫专区分类展示 | 高 |
+| 数据缓存 | 首页数据缓存5分钟，减少重复请求 | 中 |
 
-### 3.3 扩展功能（按需接入）
+### 3.3 SEO优化
 | 需求点 | 描述 | 优先级 |
 | :--- | :--- | :--- |
-| 弹幕功能 | 支持视频弹幕互动 | 低 |
-| 影视资讯 | 展示影视新闻、影评等内容 | 低 |
-| 分享功能 | 支持分享影视链接给好友 | 低 |
+| 动态标题 | 根据页面内容动态更新document.title | 高 |
+| Meta标签 | 动态更新description、keywords等meta标签 | 高 |
+| Open Graph | 支持OG标签，优化社交分享 | 高 |
+| Schema.org | 添加VideoObject和Organization结构化数据 | 中 |
 
 ---
 
@@ -115,11 +117,14 @@
 ### 5.1 技术栈
 | 分类 | 技术 | 版本 | 说明 |
 | :--- | :--- | :--- | :--- |
-| 框架 | Vue 3 | 3.4+ | 渐进式JavaScript框架 |
-| 构建工具 | Vite | 6.0+ | 快速构建工具 |
+| 框架 | Vue 3 | 3.5+ | 渐进式JavaScript框架 |
+| 构建工具 | Vite | 6.3+ | 快速构建工具 |
 | UI样式 | Tailwind CSS | 3.4+ | 原子化CSS框架 |
-| 图标 | Lucide Icons | latest | 现代化图标库 |
-| 播放器 | Video.js / Plyr | latest | 开源视频播放器 |
+| 状态管理 | Pinia | 3.0+ | Vue状态管理库 |
+| 视频播放 | HLS.js | 1.6+ | HLS流媒体播放 |
+| 类型检查 | TypeScript | 5.7+ | JavaScript超集 |
+| HTTP客户端 | Axios | 1.9+ | HTTP请求库 |
+| 路由 | Vue Router | 4.5+ | Vue官方路由 |
 
 ### 5.2 架构设计
 
@@ -131,18 +136,23 @@
 #### 5.2.2 核心模块
 ```
 ├── src/
-│   ├── components/          # 组件目录
+│   ├── api/                # API接口层
+│   │   ├── index.ts        # 线路测试接口
+│   │   └── video.ts        # 视频搜索/详情接口
+│   ├── components/         # 组件目录
+│   │   ├── Carousel.vue    # 轮播组件
 │   │   ├── Header.vue      # 顶部导航
 │   │   ├── SearchBar.vue   # 搜索框
-│   │   ├── VideoCard.vue   # 影视卡片
-│   │   ├── VideoPlayer.vue # 视频播放器
-│   │   └── LineSelector.vue# 线路选择器
-│   ├── api/                # API接口层
-│   │   ├── index.ts        # 接口聚合
-│   │   └── sources/        # 各影视源实现
+│   │   └── VideoCard.vue   # 影视卡片
+│   ├── pages/              # 页面组件
+│   │   ├── Home.vue        # 首页（发现）
+│   │   ├── Play.vue        # 播放页
+│   │   └── Search.vue      # 搜索页（找片）
+│   ├── services/           # 服务层（预留）
 │   ├── stores/             # 状态管理
-│   │   └── app.ts          # 应用状态
-│   ├── utils/              # 工具函数
+│   │   └── app.ts          # 应用状态（线路管理）
+│   ├── types/              # 类型定义
+│   ├── router/             # 路由配置
 │   ├── App.vue             # 根组件
 │   └── main.ts             # 入口文件
 ```
@@ -153,12 +163,12 @@
 
 | 接口名称 | 类型 | 状态 | 说明 |
 | :--- | :--- | :--- | :--- |
-| TMDB API | 数据接口 | ✅ 稳定 | 提供影视元数据（需API Key） |
-| 南风接口 | 播放接口 | ⚠️ 需验证 | 综合影视源 |
-| 快乐接口 | 播放接口 | ⚠️ 需验证 | 多线路影视源 |
-| 饭太硬接口 | 播放接口 | ⚠️ 需验证 | FongMi格式接口 |
-| 摸鱼接口 | 播放接口 | ⚠️ 需验证 | 综合影视源 |
-| 肥猫接口 | 播放接口 | ⚠️ 需验证 | 垂直类影视源 |
+| 红牛资源 | MacCMS | ✅ 稳定 | 综合影视源 |
+| 馒头资源 | MacCMS | ✅ 稳定 | 综合影视源 |
+| 量子资源 | MacCMS | ✅ 稳定 | 综合影视源 |
+| 非凡资源 | MacCMS | ✅ 稳定 | 综合影视源 |
+| 卧龙资源 | MacCMS | ✅ 稳定 | 综合影视源 |
+| 豆瓣资源 | MacCMS | ✅ 稳定 | 影视元数据 |
 
 #### 5.3.2 统一数据格式
 ```typescript
@@ -170,14 +180,31 @@ interface VideoItem {
   type: 'movie' | 'tv';
   rating: number;
   description: string;
-  sources: VideoSource[];
+  categories?: string[];
+  regions?: string[];
+  sources?: VideoPlaySource[];
 }
 
-interface VideoSource {
+interface VideoEpisode {
   id: string;
   name: string;
   url: string;
-  quality: string;
+}
+
+interface VideoPlaySource {
+  id: string;
+  name: string;
+  episodes: VideoEpisode[];
+}
+
+interface LineConfig {
+  id: string;
+  name: string;
+  apiUrl: string;
+  status: 'online' | 'offline' | 'testing';
+  type: 'maccms' | 'tvbox' | 'other';
+  imgProxy?: string;
+  videoProxy?: string;
 }
 ```
 
@@ -192,7 +219,7 @@ interface VideoSource {
 | Vercel | 部署简单，全球CDN加速 | 海外用户为主 |
 
 ### 6.2 部署流程
-1. 代码提交至GitHub/Gitee仓库
+1. 代码提交至GitHub仓库
 2. 配置腾讯EdgeOne/Vercel自动构建
 3. 配置自定义域名（可选）
 4. 配置HTTPS证书
@@ -211,8 +238,8 @@ interface VideoSource {
 
 ### 7.2 优先级排序
 1. **高优先级**：搜索功能、播放功能、线路切换
-2. **中优先级**：响应式设计、暗色模式、收藏功能
-3. **低优先级**：弹幕功能、分享功能、自定义线路
+2. **中优先级**：响应式设计、SEO优化、数据缓存
+3. **低优先级**：自定义线路、分享功能
 
 ---
 
@@ -227,26 +254,6 @@ interface VideoSource {
 
 ---
 
-## 附录：参考资料
-
-### 开源项目参考
-1. **LibreTV** - 轻量级免费在线视频搜索与观看平台
-   - GitHub: https://github.com/chankahou/LibreTV
-2. **MovieVerse** - 基于TMDB API的开源影视流媒体站点
-   - 官网: https://www.medevel.com/movieverse/
-3. **movie-web** - 开源电影聚合平台
-   - GitHub: https://github.com/movie-web/movie-web
-4. **Ouonnki TV** - 基于LibreTV改造的开源个人影视站
-   - 官网: https://ouonnki.is-an.org/
-
-### 影视API资源
-1. **TMDB API** - 电影数据库API
-   - 官网: https://www.themoviedb.org/
-2. **TVBox接口合集** - 多种影视源接口
-   - 维护者: 社区贡献
-
----
-
-**文档版本**: v1.0  
-**创建日期**: 2026-04-29  
-**作者**: VibeCoding Team
+**文档版本**: v2.0  
+**创建日期**: 2026-05-08  
+**作者**: VibeLume Team

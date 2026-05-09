@@ -41,6 +41,3 @@ coverage/
 # Cache
 .turbo/
 .vite/
-
-# EdgeOne edge functions (not used in Pages)
-edge/

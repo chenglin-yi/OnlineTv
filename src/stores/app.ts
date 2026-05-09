@@ -7,55 +7,55 @@ export const useAppStore = defineStore('app', () => {
     {
       id: 'hongniu',
       name: '红牛资源',
-      apiUrl: 'https://www.hongniuzy2.com/api.php/provide/vod/',
+      apiUrl: '/proxy-hongniu/api.php/provide/vod/',
       status: 'online',
       type: 'maccms',
-      imgProxy: 'https://pic.hongniuzy.com',
+      imgProxy: '',
       videoProxy: ''
     },
     {
       id: 'mtzy',
       name: '馒头资源',
-      apiUrl: 'https://www.mtzy.me/api.php/provide/vod/',
+      apiUrl: '/proxy-mtzy/api.php/provide/vod/',
       status: 'online',
       type: 'maccms',
-      imgProxy: 'https://pic.5k5z.cn',
+      imgProxy: '',
       videoProxy: ''
     },
     {
       id: 'liangzi',
       name: '量子资源',
-      apiUrl: 'https://cj.lziapi.com/api.php/provide/vod/',
+      apiUrl: '/proxy-liangzi/api.php/provide/vod/',
       status: 'online',
       type: 'maccms',
-      imgProxy: 'https://img.lzzyimg.com',
+      imgProxy: '',
       videoProxy: ''
     },
     {
       id: 'feifan',
       name: '非凡资源',
-      apiUrl: 'https://api.ffzyapi.com/api.php/provide/vod/',
+      apiUrl: '/proxy-feifan/api.php/provide/vod/',
       status: 'online',
       type: 'maccms',
-      imgProxy: 'https://img.ffzy888.com',
+      imgProxy: '',
       videoProxy: ''
     },
     {
       id: 'wolong',
       name: '卧龙资源',
-      apiUrl: 'https://collect.wolongzyw.com/api.php/provide/vod/',
+      apiUrl: '/proxy-wolong/api.php/provide/vod/',
       status: 'online',
       type: 'maccms',
-      imgProxy: 'https://imgwolong.com',
+      imgProxy: '',
       videoProxy: ''
     },
     {
       id: 'douban',
       name: '豆瓣资源',
-      apiUrl: 'https://caiji.dbzy5.com/api.php/provide/vod/',
+      apiUrl: '/proxy-douban/api.php/provide/vod/',
       status: 'online',
       type: 'maccms',
-      imgProxy: 'https://dbzy5.com',
+      imgProxy: '',
       videoProxy: ''
     }
   ])

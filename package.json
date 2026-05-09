@@ -2,6 +2,7 @@
   "name": "vibetv",
   "private": true,
   "version": "1.0.0",
+  "description": "A lightweight, open-source online streaming platform - Immersive Streaming, Anytime",
   "type": "module",
   "scripts": {
     "dev": "vite",

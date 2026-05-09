@@ -1,146 +1,150 @@
-# VibeLume - 沉浸光影，自在观影
+# VibeLume - Immersive Streaming, Anytime
 
-一个轻量级、开源免费的在线影视搜索与观看平台，支持多接口源接入，用户可自由选择播放线路。
+[中文文档](README.zh-CN.md)
 
-## 产品特色
+A lightweight, open-source online streaming platform for searching and watching movies & TV shows. Supports multiple content sources with user-selectable playback lines.
 
-- **多源聚合**：整合多个影视API接口，提供丰富的影视资源
-- **线路切换**：支持用户自由选择不同播放线路，提升观影成功率
-- **静态部署**：纯前端实现，支持Vercel/腾讯EdgeOne一键部署
-- **无广告干扰**：专注观影体验，无强制广告
-- **智能缓存**：搜索结果和首页数据本地缓存，提升响应速度
+## Features
 
-## 技术栈
+- **Multi-Source Aggregation**: Integrates multiple streaming API sources for rich content coverage
+- **Line Switching**: Freely switch between different playback sources for better success rates
+- **Static Deployment**: Pure frontend implementation, one-click deploy to EdgeOne Pages / Vercel
+- **Ad-Free**: Focused viewing experience with no forced advertisements
+- **Smart Caching**: Local caching for search results and homepage data for faster response
 
-| 分类 | 技术 | 说明 |
+## Tech Stack
+
+| Category | Technology | Description |
 | :--- | :--- | :--- |
-| 框架 | Vue 3 | 渐进式JavaScript框架 |
-| 构建工具 | Vite | 快速构建工具 |
-| UI样式 | Tailwind CSS | 原子化CSS框架 |
-| 状态管理 | Pinia | Vue状态管理库 |
-| 视频播放 | HLS.js | HLS流媒体播放 |
-| 类型检查 | TypeScript | JavaScript超集 |
-| HTTP客户端 | Axios | HTTP请求库 |
-| 路由 | Vue Router | Vue官方路由 |
+| Framework | Vue 3 | Progressive JavaScript framework |
+| Build Tool | Vite | Next-generation frontend build tool |
+| UI Styling | Tailwind CSS | Utility-first CSS framework |
+| State Management | Pinia | Intuitive Vue state management |
+| Video Playback | HLS.js | HLS streaming playback |
+| Type Checking | TypeScript | Typed JavaScript superset |
+| HTTP Client | Axios | Promise-based HTTP client |
+| Routing | Vue Router | Official Vue routing library |
 
-## 快速开始
+## Quick Start
 
-### 环境要求
+### Prerequisites
 
 - Node.js 18+
-- npm 或 pnpm
+- npm or pnpm
 
-### 安装
+### Installation
 
 ```bash
-# 克隆仓库
+# Clone the repository
 git clone https://github.com/chenglin-yi/OnlineTv.git
 cd OnlineTv
 
-# 安装依赖
+# Install dependencies
 npm install
 ```
 
-### 开发
+### Development
 
 ```bash
 npm run dev
 ```
 
-访问 http://localhost:5173 预览应用。
+Visit http://localhost:5173 to preview the application.
 
-### 构建
+### Build
 
 ```bash
 npm run build
 ```
 
-构建产物将输出到 `dist/` 目录。
+Build output will be generated in the `dist/` directory.
 
-### 预览
+### Preview
 
 ```bash
 npm run preview
 ```
 
-## 项目结构
+## Project Structure
 
 ```
 ├── src/
-│   ├── api/                # API接口层
-│   │   ├── index.ts        # 线路测试接口
-│   │   └── video.ts        # 视频搜索/详情接口
-│   ├── components/         # Vue组件
-│   │   ├── Carousel.vue    # 轮播组件
-│   │   ├── Header.vue      # 顶部导航
-│   │   ├── SearchBar.vue   # 搜索框
-│   │   └── VideoCard.vue   # 影视卡片
-│   ├── pages/              # 页面组件
-│   │   ├── Home.vue        # 首页（发现）
-│   │   ├── Play.vue        # 播放页
-│   │   └── Search.vue      # 搜索页（找片）
-│   ├── stores/             # 状态管理
-│   │   └── app.ts          # 应用状态（线路管理）
-│   ├── types/              # 类型定义
-│   ├── router/             # 路由配置
-│   ├── App.vue             # 根组件
-│   └── main.ts             # 入口文件
-├── public/                 # 静态资源
-├── .env                    # 环境变量
-├── index.html              # HTML模板
-├── package.json            # 项目配置
-├── vite.config.ts          # Vite配置
-└── tailwind.config.js      # Tailwind配置
+│   ├── api/                # API layer
+│   │   ├── index.ts        # Line testing API
+│   │   └── video.ts        # Video search & detail API
+│   ├── components/         # Vue components
+│   │   ├── Carousel.vue    # Carousel component
+│   │   ├── Header.vue      # Top navigation
+│   │   ├── SearchBar.vue   # Search bar
+│   │   └── VideoCard.vue   # Video card
+│   ├── pages/              # Page components
+│   │   ├── Home.vue        # Home page (Discover)
+│   │   ├── Play.vue        # Playback page
+│   │   └── Search.vue      # Search page
+│   ├── stores/             # State management
+│   │   └── app.ts          # App state (line management)
+│   ├── types/              # Type definitions
+│   ├── router/             # Route configuration
+│   ├── App.vue             # Root component
+│   └── main.ts             # Entry point
+├── edge-functions/         # EdgeOne Pages Functions (API proxy)
+├── public/                 # Static assets
+├── .env                    # Environment variables
+├── edgeone.json            # EdgeOne Pages configuration
+├── index.html              # HTML template
+├── package.json            # Project configuration
+├── vite.config.ts          # Vite configuration
+└── tailwind.config.js      # Tailwind configuration
 ```
 
-## 部署
+## Deployment
 
-### 腾讯EdgeOne
+### Tencent EdgeOne Pages
 
-1. Fork 本仓库到你的GitHub账号
-2. 登录 [腾讯EdgeOne](https://edgeone.ai/)
-3. 创建新项目，连接GitHub仓库
-4. 配置构建命令：`npm run build`
-5. 配置输出目录：`dist`
-6. 部署完成
+1. Fork this repository to your GitHub account
+2. Log in to [Tencent EdgeOne](https://edgeone.ai/)
+3. Create a new project and connect your GitHub repository
+4. Build command: `npm run build`
+5. Output directory: `dist`
+6. Deploy
 
 ### Vercel
 
-1. Fork 本仓库到你的GitHub账号
-2. 登录 [Vercel](https://vercel.com/)
-3. Import 本仓库
-4. 部署完成
+1. Fork this repository to your GitHub account
+2. Log in to [Vercel](https://vercel.com/)
+3. Import this repository
+4. Deploy
 
-## 影视源接口
+## Content Sources
 
-| 接口名称 | 类型 | 状态 | 说明 |
+| Source Name | Type | Status | Description |
 | :--- | :--- | :--- | :--- |
-| 红牛资源 | MacCMS | ✅ 稳定 | 综合影视源 |
-| 馒头资源 | MacCMS | ✅ 稳定 | 综合影视源 |
-| 量子资源 | MacCMS | ✅ 稳定 | 综合影视源 |
-| 非凡资源 | MacCMS | ✅ 稳定 | 综合影视源 |
-| 卧龙资源 | MacCMS | ✅ 稳定 | 综合影视源 |
-| 豆瓣资源 | MacCMS | ✅ 稳定 | 影视元数据 |
+| HongNiu | MacCMS | ✅ Stable | General streaming source |
+| MTZY | MacCMS | ✅ Stable | General streaming source |
+| LiangZi | MacCMS | ✅ Stable | General streaming source |
+| FeiFan | MacCMS | ✅ Stable | General streaming source |
+| WoLong | MacCMS | ✅ Stable | General streaming source |
+| DouBan | MacCMS | ✅ Stable | Media metadata |
 
-## 开发规范
+## Development Conventions
 
-本项目遵循以下代码规范：
+This project follows these coding standards:
 
-- **命名**：变量/函数使用 camelCase，组件使用 PascalCase，常量使用 UPPER_SNAKE_CASE
-- **代码风格**：2空格缩进，100字符行宽，单引号（JS）
-- **提交信息**：使用语义化提交前缀
+- **Naming**: camelCase for variables/functions, PascalCase for components, UPPER_SNAKE_CASE for constants
+- **Code Style**: 2-space indentation, 100-char line width, single quotes (JS)
+- **Commit Messages**: Semantic commit prefixes
 
-## 许可证
+## License
 
-本项目仅供个人学习研究使用，请勿用于商业用途。
+This project is for personal learning and research purposes only. Do not use for commercial purposes.
 
-## 参考项目
+## Acknowledgements
 
-- [LibreTV](https://github.com/chankahou/LibreTV) - 轻量级免费在线视频搜索与观看平台
-- [MovieVerse](https://www.medevel.com/movieverse/) - 基于TMDB API的开源影视流媒体站点
-- [movie-web](https://github.com/movie-web/movie-web) - 开源电影聚合平台
+- [LibreTV](https://github.com/chankahou/LibreTV) - Lightweight free online video search & watch platform
+- [MovieVerse](https://www.medevel.com/movieverse/) - Open-source streaming site based on TMDB API
+- [movie-web](https://github.com/movie-web/movie-web) - Open-source movie aggregation platform
 
 ---
 
-**文档版本**: v2.0  
-**创建日期**: 2026-05-08
+**Document Version**: v2.0  
+**Created**: 2026-05-08

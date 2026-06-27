@@ -106,18 +106,18 @@ onUnmounted(() => {
           </div>
           
           <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/50 to-transparent">
-            <div class="absolute bottom-0 left-0 right-0 p-6 md:p-10 lg:p-14">
+            <div class="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-10 lg:p-14">
               <div class="max-w-2xl">
-                <h2 class="text-2xl md:text-3xl lg:text-5xl font-bold font-display text-white mb-4">
+                <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-5xl font-bold font-display text-white mb-2 sm:mb-4">
                   {{ banner.title }}
                 </h2>
-                <p class="text-gray-300 text-sm md:text-base lg:text-lg line-clamp-2 mb-6 opacity-90">
+                <p class="text-gray-300 text-xs sm:text-sm md:text-base lg:text-lg line-clamp-2 sm:line-clamp-3 mb-4 sm:mb-6 opacity-90">
                   {{ banner.description }}
                 </p>
                 <button
-                  class="flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-white font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/30"
+                  class="flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-primary hover:bg-primary/90 text-white font-medium rounded-lg transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/30 text-sm sm:text-base"
                 >
-                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z"/>
                   </svg>
                   <span>立即观看</span>
@@ -128,29 +128,29 @@ onUnmounted(() => {
         </div>
       </div>
 
-      <div class="absolute bottom-6 right-6 flex gap-2">
+      <div class="absolute bottom-4 sm:bottom-6 right-4 sm:right-6 flex gap-2">
         <button
           v-for="(_, index) in banners"
           :key="index"
-          class="w-2 h-2 rounded-full transition-all duration-300"
-          :class="index === currentIndex ? 'bg-white w-6' : 'bg-white/40 hover:bg-white/70'"
+          class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-all duration-300"
+          :class="index === currentIndex ? 'bg-white w-4 sm:w-6' : 'bg-white/40 hover:bg-white/70'"
           @click="goToSlide(index)"
         ></button>
       </div>
 
       <button
-        class="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center text-white transition-all hover:scale-110 z-20 cursor-pointer"
+        class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center text-white transition-all hover:scale-110 z-20 cursor-pointer"
         @click="goToSlide(currentIndex === 0 ? banners.length - 1 : currentIndex - 1)"
       >
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
       </button>
       <button
-        class="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center text-white transition-all hover:scale-110 z-20 cursor-pointer"
+        class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center text-white transition-all hover:scale-110 z-20 cursor-pointer"
         @click="goToSlide((currentIndex + 1) % banners.length)"
       >
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
       </button>

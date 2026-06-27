@@ -500,11 +500,11 @@ onUnmounted(() => {
 
           <div
             v-if="videoUrl"
-            class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-4 transition-opacity duration-300"
+            class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent px-3 sm:px-4 py-3 sm:py-4 transition-opacity duration-300"
             :class="{ 'opacity-0': !showControls && isPlaying, 'opacity-100': showControls || !isPlaying }"
           >
-            <div class="flex items-center gap-4">
-              <div class="flex-1">
+            <div class="flex items-center gap-2 sm:gap-4 mb-2 sm:mb-3">
+              <div class="flex-1 min-w-0">
                 <input
                   type="range"
                   :value="currentTime"
@@ -513,76 +513,78 @@ onUnmounted(() => {
                   class="w-full h-1 bg-gray-600 rounded-full appearance-none cursor-pointer slider"
                 />
               </div>
-              <span class="text-white text-sm min-w-[80px] text-right">
+              <span class="text-white text-xs sm:text-sm min-w-[60px] sm:min-w-[80px] text-right">
                 {{ formatTime(currentTime) }} / {{ formatTime(duration) }}
               </span>
             </div>
             
-            <div class="flex items-center justify-between mt-3">
-              <div class="flex items-center gap-3">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+              <div class="flex items-center gap-2 sm:gap-3">
                 <button
                   @click="togglePlay"
-                  class="text-white hover:text-primary transition-colors"
+                  class="text-white hover:text-primary transition-colors p-1"
                 >
-                  <svg v-if="!isPlaying" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <svg v-if="!isPlaying" class="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z"/>
                   </svg>
-                  <svg v-else class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <svg v-else class="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
                   </svg>
                 </button>
                 
-                <div class="flex items-center gap-2 group">
+                <div class="flex items-center gap-1 sm:gap-2 group relative">
                   <button
                     @click="toggleMute"
-                    class="text-white hover:text-primary transition-colors"
+                    class="text-white hover:text-primary transition-colors p-1"
                   >
-                    <svg v-if="volume > 0" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <svg v-if="volume > 0" class="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89 1.19 5 3.65 5 6.71s-2.11 5.52-5 6.71v2.06c4.01-1.29 7-4.91 7-9.77s-2.99-8.48-7-9.77z"/>
                     </svg>
-                    <svg v-else class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <svg v-else class="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.86-3.95-8.87-8.87-9.79V3.5c0 .54.23 1.04.61 1.42l1.41 1.41C15.62 6.58 17 8.82 17 12zm0 0c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM3 9v6h4l5 5V4L7 9H3z"/>
                     </svg>
                   </button>
-                  <input
-                    type="range"
-                    :value="volume"
-                    max="100"
-                    @input="updateVolume"
-                    class="w-16 h-1 bg-gray-600 rounded-full appearance-none cursor-pointer slider hidden group-hover:block"
-                  />
+                  <div class="hidden sm:block">
+                    <input
+                      type="range"
+                      :value="volume"
+                      max="100"
+                      @input="updateVolume"
+                      class="w-16 h-1 bg-gray-600 rounded-full appearance-none cursor-pointer slider"
+                    />
+                  </div>
                 </div>
                 
                 <button
                   @click="toggleFullscreen"
-                  class="text-white hover:text-primary transition-colors"
+                  class="text-white hover:text-primary transition-colors p-1 hidden sm:block"
                 >
-                  <svg v-if="!isFullscreen" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <svg v-if="!isFullscreen" class="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
                   </svg>
-                  <svg v-else class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                  <svg v-else class="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>
                   </svg>
                 </button>
               </div>
               
-              <div class="flex items-center gap-3">
+              <div class="flex items-center gap-2 sm:gap-3">
                 <div class="relative">
                   <button
                     @click.stop="toggleSourcePanel"
-                    class="px-3 py-1 bg-white/10 hover:bg-white/20 rounded text-white text-sm transition-colors"
+                    class="px-2 sm:px-3 py-1 bg-white/10 hover:bg-white/20 rounded text-white text-xs sm:text-sm transition-colors"
                   >
                     {{ currentSource?.name || '线路' }}
                   </button>
                   <div
                     v-if="showSourcePanel && videoItem.sources && videoItem.sources.length > 0"
-                    class="absolute bottom-full right-0 mb-2 w-32 bg-gray-900 rounded-lg shadow-xl overflow-hidden z-50"
+                    class="absolute bottom-full right-0 mb-2 w-28 sm:w-32 bg-gray-900 rounded-lg shadow-xl overflow-hidden z-50"
                   >
                     <button
                       v-for="(source, index) in videoItem.sources"
                       :key="source.id"
                       @click.stop="selectSource(index)"
-                      class="w-full px-4 py-2 text-left text-white hover:bg-primary/20 transition-colors text-sm"
+                      class="w-full px-3 sm:px-4 py-2 text-left text-white hover:bg-primary/20 transition-colors text-xs sm:text-sm"
                       :class="{ 'bg-primary/30': index === currentSourceIndex }"
                     >
                       {{ source.name }}
@@ -593,7 +595,7 @@ onUnmounted(() => {
                 <div class="relative">
                   <button
                     @click.stop="toggleEpisodePanel"
-                    class="px-3 py-1 bg-white/10 hover:bg-white/20 rounded text-white text-sm transition-colors"
+                    class="px-2 sm:px-3 py-1 bg-white/10 hover:bg-white/20 rounded text-white text-xs sm:text-sm transition-colors"
                   >
                     {{ currentEpisode?.name || '集数' }}
                   </button>
@@ -613,29 +615,29 @@ onUnmounted(() => {
             @click.stop
           >
             <div class="flex items-center justify-between px-4 py-3 border-b border-gray-700 sticky top-0 bg-gray-900">
-              <h3 class="text-white font-medium">选集</h3>
+              <h3 class="text-white font-medium text-sm sm:text-base">选集</h3>
               <button
                 @click="showEpisodePanel = false"
-                class="text-gray-400 hover:text-white transition-colors"
+                class="text-gray-400 hover:text-white transition-colors p-1"
               >
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             </div>
-            <div class="p-4">
-              <div v-if="currentSource?.episodes?.length" class="grid grid-cols-6 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 gap-2">
+            <div class="p-3 sm:p-4">
+              <div v-if="currentSource?.episodes?.length" class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-12 gap-1.5 sm:gap-2">
                 <button
                   v-for="(episode, index) in currentSource.episodes"
                   :key="episode.id"
                   @click="handleSelectEpisode(index); showEpisodePanel = false"
-                  class="px-2 py-2 text-center text-white hover:bg-primary/30 transition-colors text-sm rounded"
+                  class="px-1.5 sm:px-2 py-1.5 sm:py-2 text-center text-white hover:bg-primary/30 transition-colors text-xs sm:text-sm rounded"
                   :class="{ 'bg-primary': index === currentEpisodeIndex }"
                 >
                   {{ episode.name }}
                 </button>
               </div>
-              <div v-else class="text-gray-500 text-center py-8">
+              <div v-else class="text-gray-500 text-center py-8 text-sm">
                 暂无集数
               </div>
             </div>
@@ -721,7 +723,7 @@ onUnmounted(() => {
             </div>
 
             <div class="lg:col-span-1">
-              <div class="bg-dark-card rounded-lg p-6 sticky top-24">
+              <div class="bg-dark-card rounded-lg p-4 sm:p-6 sticky top-20 sm:top-24">
                 <img
                   v-if="videoItem.cover"
                   :src="videoItem.cover"
@@ -730,16 +732,16 @@ onUnmounted(() => {
                 />
                 
                 <div v-if="currentSource?.episodes && currentSource.episodes.length > 1" class="mb-4">
-                  <h3 class="text-white font-medium mb-3 flex items-center justify-between">
+                  <h3 class="text-white font-medium mb-3 flex items-center justify-between text-sm sm:text-base">
                     <span>集数选择</span>
-                    <span class="text-gray-500 text-sm">共{{ currentSource.episodes.length }}集</span>
+                    <span class="text-gray-500 text-xs sm:text-sm">共{{ currentSource.episodes.length }}集</span>
                   </h3>
-                  <div class="grid grid-cols-5 gap-2">
+                  <div class="grid grid-cols-4 sm:grid-cols-5 gap-1.5 sm:gap-2">
                     <button
                       v-for="(episode, index) in currentSource.episodes.slice(0, 20)"
                       :key="episode.id"
                       @click="selectEpisode(index)"
-                      class="aspect-square flex items-center justify-center rounded-lg text-sm font-medium transition-all"
+                      class="aspect-square flex items-center justify-center rounded-lg text-xs sm:text-sm font-medium transition-all min-h-[32px] sm:min-h-[40px]"
                       :class="index === currentEpisodeIndex 
                         ? 'bg-primary text-white' 
                         : 'bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white'"
@@ -750,20 +752,20 @@ onUnmounted(() => {
                   <button
                     v-if="currentSource.episodes.length > 20"
                     @click="showEpisodePanel = true"
-                    class="w-full mt-2 py-2 text-gray-400 hover:text-white text-sm transition-colors"
+                    class="w-full mt-2 py-2 text-gray-400 hover:text-white text-xs sm:text-sm transition-colors"
                   >
                     查看更多集数 →
                   </button>
                 </div>
 
                 <div v-if="videoItem.sources && videoItem.sources.length > 1" class="mb-4">
-                  <h3 class="text-white font-medium mb-3">线路选择</h3>
-                  <div class="flex flex-wrap gap-2">
+                  <h3 class="text-white font-medium mb-3 text-sm sm:text-base">线路选择</h3>
+                  <div class="flex flex-wrap gap-1.5 sm:gap-2">
                     <button
                       v-for="(source, index) in videoItem.sources"
                       :key="source.id"
                       @click="selectSource(index)"
-                      class="px-4 py-2 rounded-lg text-sm font-medium transition-all"
+                      class="px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all"
                       :class="index === currentSourceIndex 
                         ? 'bg-primary text-white' 
                         : 'bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white'"

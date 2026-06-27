@@ -95,7 +95,9 @@ button, a, [role="button"] {
 }
 
 input, textarea {
-  touch-action: none;
+  touch-action: manipulation;
+  -webkit-user-select: text;
+  user-select: text;
 }
 
 .video-container {
